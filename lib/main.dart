@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
-import 'package:flutter_application_1/theme/Colors.dart';
+import 'package:flutter_application_1/screens/login_screen.dart';
+import 'package:flutter_application_1/screens/signup_screen.dart';
+import 'package:flutter_application_1/screens/splash_screen.dart';
+import 'package:flutter_application_1/theme/colors.dart'; // Corrected import statement
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Added WidgetsFlutterBinding.ensureInitialized()
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key); // Corrected key declaration
 
   @override
   Widget build(BuildContext context) {
@@ -22,43 +27,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "nunito",
-        colorScheme: ColorScheme.fromSeed(seedColor: bgPrimary),
+        colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue), // Updated seedColor to primarySwatch
         scaffoldBackgroundColor: Colors.grey[300],
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
+      routes: {
+        '/login': (context) => Login(),
+        '/signup': (context) => Signup(),
+        '/home': (context) => HomeScreen(),
+      },
     );
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: FutureBuilder(
-//         future: checkUserLoggedInStatus(),
-//         builder: (BuildContext context, AsyncSnapshot snapshot) {
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return SplashScreen();
-//           } else {
-//             if (snapshot.data == true) {
-//               return HomeScreen();
-//             } else {
-//               return LoginScreen();
-//             }
-//           }
-//         },
-//       ),
-//     );
-//   }
-
-//   Future<bool> checkUserLoggedInStatus() async {
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-//     return isLoggedIn;
-//   }
-// }

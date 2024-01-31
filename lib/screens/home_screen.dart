@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         iconSize: 16,
+        backgroundColor: Colors.white,
         selectedItemColor: bgPrimary,
         selectedFontSize: 14,
         items: [

@@ -4,7 +4,8 @@ import 'package:flutter_application_1/theme/Colors.dart';
 
 class InputWidget extends StatelessWidget {
   final String lable;
-  const InputWidget({super.key, required this.lable});
+  final TextEditingController controller;
+  const InputWidget({super.key, required this.lable, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class InputWidget extends StatelessWidget {
         ),
         SizedBox(height: 8),
         TextField(
+          controller: controller,
           style: GoogleFonts.nunito(
             fontWeight: FontWeight.w500,
             color: Color(0xFF0D1220),

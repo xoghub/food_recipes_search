@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/button_primary.dart';
 import 'package:flutter_application_1/widgets/input_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -11,6 +12,13 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,15 +61,48 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                InputWidget(lable: 'Username'),
+                InputWidget(
+                  lable: 'Username',
+                  controller: _usernameController,
+                ),
                 const SizedBox(height: 12),
-                InputWidget(lable: 'Email'),
+                InputWidget(
+                  lable: 'Email',
+                  controller: _emailController,
+                ),
                 const SizedBox(height: 12),
-                InputWidget(lable: 'Password'),
+                InputWidget(
+                  lable: 'Password',
+                  controller: _passwordController,
+                ),
                 const SizedBox(height: 12),
-                InputWidget(lable: 'Confirm Password'),
+                InputWidget(
+                  lable: 'Confirm Password',
+                  controller: _confirmPasswordController,
+                ),
                 const Spacer(),
-                ButtonPrimary(text: 'Daftar', onTap: () {}),
+                ButtonPrimary(
+                    text: 'Daftar',
+                    onTap: () async {
+                      try {
+                        if (_passwordController.text ==
+                            _confirmPasswordController.text) {
+                          UserCredential userCredential =
+                              await _auth.createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          // If signup is successful
+                          Navigator.pushNamed(context, '/login');
+                        } else {
+                          // Handle password mismatch error
+                          print("Password mismatch");
+                        }
+                      } catch (e) {
+                        // Handle signup errors here
+                        print("Error during signup: $e");
+                      }
+                    }),
                 const SizedBox(height: 20),
               ],
             ),

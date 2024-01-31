@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/button_primary.dart';
 import 'package:flutter_application_1/widgets/input_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,6 +12,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +65,38 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: 18,
                 ),
-                InputWidget(lable: 'Email'),
+                InputWidget(
+                  lable: 'Email',
+                  controller: _emailController,
+                ),
                 const SizedBox(height: 12),
-                InputWidget(lable: 'Password'),
+                InputWidget(
+                  lable: 'Password',
+                  controller: _passwordController,
+                ),
                 const Spacer(),
-                ButtonPrimary(text: 'Masuk', onTap: () {}),
+                ButtonPrimary(
+                    text: 'Masuk',
+                    onTap: () async {
+                      // try {
+                      //   UserCredential userCredential =
+                      //       await _auth.signInWithEmailAndPassword(
+                      //     email: _emailController.text,
+                      //     password: _passwordController.text,
+                      //   );
+                      //   // If login is successful
+                      // } catch (e) {
+                      //   // Handle login errors here
+                      //   print("Error during login: $e");
+                      // }
+                      Navigator.pushReplacementNamed(context, '/home');
+                    }),
                 const SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/signup');
+                    },
                     child: RichText(
                       text: const TextSpan(
                           text: 'Tidak punya akun? ',
