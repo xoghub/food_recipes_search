@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "703471362747",
+    "project_id": "receiptin",
+    "storage_bucket": "receiptin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703471362747:android:7eaac32eb3e3615ad5ff9e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfTqIPG0nOmwiL8MJ6oiYFwvn3rRuIGRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
