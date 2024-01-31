@@ -1,3 +1,3 @@
 class ApiKey {
-  static String keys = 'f2802fadb2694bf2ac76e9040ba9fee1';
+  static String keys = '1913d89f1cba487aaa7a36a4065d5427';
 }

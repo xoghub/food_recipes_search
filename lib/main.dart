@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "nunito",
         colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.blue), // Updated seedColor to primarySwatch
-        scaffoldBackgroundColor: Colors.grey[300],
+        scaffoldBackgroundColor: Colors.grey[200],
         useMaterial3: true,
       ),
       home: SplashScreen(),

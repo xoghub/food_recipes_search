@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/theme/Colors.dart';
 import 'package:flutter_application_1/widgets/CategoryCard.dart';
+import 'package:flutter_application_1/screens/DetailReceipt.dart';
 import 'package:flutter_application_1/widgets/FoodDrinkCard.dart';
 import 'package:flutter_application_1/widgets/GridCard.dart';
 import 'package:flutter_application_1/widgets/Searchbar.dart';
@@ -137,11 +138,31 @@ class _HomeState extends State<Home> {
                           } else {
                             var receipts = snapshot.data?['recipes'];
                             var receipt = receipts[index];
-                            return GridCard(
-                              title: receipt['title'],
-                              image: NetworkImage(receipt['image']),
-                              rating: receipt['spoonacularScore'].toString(),
-                              duration: '${receipt['readyInMinutes']} min',
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailReceiptPage(
+                                              title: receipt['title'],
+                                              description:
+                                                  receipt['description'],
+                                              cookingTime:
+                                                  receipt['cookingTime'],
+                                              rating: receipt['rating'],
+                                              ingredients:
+                                                  receipt['ingredients'],
+                                              cookingSteps:
+                                                  receipt['cookingSteps'],
+                                              image: receipt,
+                                            )));
+                              },
+                              child: GridCard(
+                                title: receipt['title'],
+                                image: NetworkImage(receipt['image']),
+                                rating: receipt['spoonacularScore'].toString(),
+                                duration: '${receipt['readyInMinutes']} min',
+                              ),
                             );
                           }
                         } else {
